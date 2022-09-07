@@ -20,14 +20,14 @@ function createBucket()
 
   try {
     $result = $s3Client->createBucket([
-        'Bucket' => $bucket,
+      'Bucket' => $bucket,
     ]);
 
     echo 'The bucket\'s location is: ' .
-        $result['Location'] . '. The bucket\'s effective URI is: ' . 
-        $result['@metadata']['effectiveUri'] . PHP_EOL;
+      $result['Location'] . '. The bucket\'s effective URI is: ' . 
+      $result['@metadata']['effectiveUri'] . PHP_EOL;
 
-        return true;
+      return true;
   } catch (AwsException $e) {
     echo 'Error: ' . $e->getAwsErrorMessage() . PHP_EOL;
     if (strstr($e->getAwsErrorMessage(), 'you already own it'))
@@ -54,7 +54,7 @@ function uploadFile()
     try {
         $result = $uploader->upload();
         if ($result["@metadata"]["statusCode"] == '200') {
-            echo 'File successfully uploaded to ' . $result["ObjectURL"] . PHP_EOL;
+          echo 'File successfully uploaded to ' . $result["ObjectURL"] . PHP_EOL;
         }
         print($result . PHP_EOL);
     } catch (MultipartUploadException $e) {
